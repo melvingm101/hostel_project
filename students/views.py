@@ -1,5 +1,6 @@
 # Create your views here.
 from csv import excel
+import openpyxl
 
 from django.forms import forms
 from django.http import HttpResponse
@@ -14,6 +15,13 @@ def login_page(request):
     return render(request, 'front.html')
 
 def insert_excel(request):
+    if request.method == "POST":
+        excel_files = request.FILES["excel_file"]
+        wb = openpyxl.load_workbook(excel_files)
+        worksheet = wb["Book1"]
+        print(worksheet)
+        render(request, 'homepage.html', {"worksheet": worksheet})
+
     return render(request, 'insertExcel.html')
 
 def login(request):
@@ -28,24 +36,6 @@ def login(request):
 
     return render(request, 'front.html', {"form": form})
 
-def upload(request):
-    if request.method == "POST":
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            filehandle = request.FILES['file']
-            return excel.make_response(filehandle.get_sheet(), "csv",
-                                       file_name="download")
-    else:
-        form = UploadFileForm()
-    return render(
-        request,
-        'upload_form.html',
-        {
-            'form': form,
-            'title': 'Excel file upload and download example',
-            'header': ('Please choose any excel file ' +
-                       'from your cloned repository:')
-        })
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
