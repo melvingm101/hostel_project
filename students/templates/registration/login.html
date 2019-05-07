@@ -15,10 +15,9 @@
         <p class="display-4 text-center mb-5 mt-5">Hostel Database login</p>
         <form name="homepage.html" method="post">
             {% csrf_token %}
-            {{ form }}
             <input class="form-control mb-3" type="text" placeholder="Username" name="username">
             <input type="password" class="form-control mb-3" id="password" placeholder="Password" name="password">
-            <input type="submit" class="btn btn-primary pl-5 pr-5"></input>
+            <input type="submit" class="btn btn-primary pl-5 pr-5">
             <h2>{{ worksheet }}</h2>
         </form>
     </div>
