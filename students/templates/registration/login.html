@@ -8,16 +8,16 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Hostel Database Login</title>
   </head>
-  <body style="background: #39add1" class="text-light">
+  <body style="background: linear-gradient(to right, #0575e6, #021b79);" class="text-light">
     <div class="d-flex flex-column" style="margin-left: 20%; margin-right: 20%; margin-top: 10%;">
         <p class="display-4 text-center mb-5 mt-5">Hostel Database login</p>
         <form name="homepage.html" method="post">
             {% csrf_token %}
             <input class="form-control mb-3" type="text" placeholder="Username" name="username">
             <input type="password" class="form-control mb-3" id="password" placeholder="Password" name="password">
-            <input type="submit" class="btn btn-primary pl-5 pr-5">
+            <input type="submit" class="btn btn-light pl-5 pr-5">
             <h2>{{ worksheet }}</h2>
         </form>
     </div>
