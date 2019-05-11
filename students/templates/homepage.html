@@ -192,7 +192,7 @@
                   <th scope="col">#</th>
                   <th scope="col">ROOM NO</th> 
                   <th scope="col">BLOCK</th>
-                  <th scope="col">STUDENT</th>
+                  <th scope="col">NAME</th>
                   <th scope="col">MOBILE</th>
                   <th scope="col">ID NO.</th>
               </tr>
@@ -203,12 +203,12 @@
             {% for rows in res %}
 
             <tr>
-              <td>{{ rows.0 }}</td>
-              <td>{{ rows.1 }}</td>
-              <td>{{ rows.2 }}</td>
-              <td>{{ rows.3 }}</td>
-              <td>{{ rows.4 }}</td>
-              <td>{{ rows.5 }}</td>
+              <td>{{ rows.id }}</td>
+              <td>{{ rows.room_no }}</td>
+              <td>{{ rows.block }}</td>
+              <td>{{ rows.name }}</td>
+              <td>{{ rows.mob_no }}</td>
+              <td>{{ rows.id_no }}</td>
             </tr>
 
             {% endfor %}
