@@ -13,16 +13,16 @@
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/table.js' %}"></script>
 
-        
+
     <link rel="stylesheet" href="homepage.css">
     <link rel="stylesheet" href="animate.css">
-                
+
     <title>Homepage</title>
   </head>
   <body class="bg-light">
     <!-- NAVBAR -->
     <nav class="navbar navbar-light bg-light">
-        
+
       </nav>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -30,23 +30,23 @@
             <img src="{% static "img/logo.png" %}" width="30" height="30" alt="">
       </a>
       <a class="navbar-brand display-1 ml-2" href="#">BITS Hostel Admin Page</a>
-      
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="http://172.16.100.8:5000/next">Homepage<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'next' %}">Homepage<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="http://172.16.100.8:5000/next">Students</a>
+            <a class="nav-link" href="{% url 'next' %}">Students</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="http://172.16.100.8:5000/getPassed">Passed Out</a>
           </li>
           <li class="nav-item">
-                <a class="nav-link" href="#">Items</a>
+            <a class="nav-link" href="#">Items</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="{% url 'guest' %}">Guests</a>
@@ -65,39 +65,39 @@
       <div class="container mt-5 mb-4">
           {% load static %}
         <img src="{% static "img/logo.png" %}" style="max-height:150px;" class="rounded mx-auto d-block" alt="...">
-        <h1 class="display-4 text-white text-lg-center">BITS Hostel Student Page</h1>
-        <p class="lead text-white text-sm-center">Welcome to the BITS Hostel Student page! Create or manage the student list here!</p>
+        <h1 class="display-4 text-white text-lg-center">BITS Hostel Guest Page</h1>
+        <p class="lead text-white text-sm-center">Welcome to the BITS Hostel Guest page! Create or manage the guest list here!</p>
       </div>
     </div>
     <!-- /MIDDLE IMAGE PART -->
 
     <!-- TABLE -->
     <div class="major" style="text-align:center;"> <!-- DIV FOR ADDING FILTERS -->
-      
+
       <div class="custom-control custom-radio custom-control-inline">
           <input type="radio" id="customRadioInline1" name="category" class="custom-control-input" onclick="filterSelection()">
           <label class="custom-control-label" for="customRadioInline1">Room Number</label>
       </div>
       <div class="custom-control custom-radio custom-control-inline">
           <input type="radio" id="customRadioInline2" name="category" class="custom-control-input" onclick="filterSelection()">
-          <label class="custom-control-label" for="customRadioInline2">Block</label>
+          <label class="custom-control-label" for="customRadioInline2">Mobile</label>
       </div>
       <div class="custom-control custom-radio custom-control-inline">
           <input type="radio" id="customRadioInline3" name="category" class="custom-control-input" onclick="filterSelection()">
-          <label class="custom-control-label" for="customRadioInline3">Student Name</label>
+          <label class="custom-control-label" for="customRadioInline3">Guest Name</label>
       </div>
       <div class="custom-control custom-radio custom-control-inline">
           <input type="radio" id="customRadioInline4" name="category" class="custom-control-input" onclick="filterSelection()">
-          <label class="custom-control-label" for="customRadioInline4">ID No</label>
+          <label class="custom-control-label" for="customRadioInline4">Joining Date</label>
       </div>
 
       <div class="col-md-4 mt-3 mb-3 mx-auto">
           <input type="text" class="form-control" id="myInput" placeholder="Search..." required onkeyup="myFunction()">
       </div>
-    
+
 <!-- INSERTING STUDENTS THROUGH MODAL-->
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Insert new Student
+        Insert new Guest
       </button>
       <a href="" class="btn btn-primary">
         PassOut Excel
@@ -109,14 +109,14 @@
       <button id="generate"class="btn btn-primary">
         Generate Summary
       </button>
-    </div>  
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Insert Student Details</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Insert Guest Details</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -145,7 +145,7 @@
                         </div>
                       </div>
                     </div>
-                  
+
                   <div class="row">
                       <div class="col">
                           <div class="form-group">
@@ -201,8 +201,8 @@
                           </div>
                       </div>
                   </div>
-                  
-                  
+
+
 
 
 
@@ -218,20 +218,21 @@
       </div>
     </div>
 <!-- /INSERTING STUDENTS THROUGH MODAL -->
-      
-      
+
+
     </div>
-    
+
     <div class="table-responsive-sm mt-3">
       <table class="table table-hover table-bordered" id="t01">
           <thead class="thead-default">
               <tr class="bg-dark text-light">
                   <th scope="col">#</th>
-                  <th scope="col">ROOM NO</th> 
-                  <th scope="col">BLOCK</th>
-                  <th scope="col">NAME</th>
+                  <th scope="col">GUEST NAME</th>
+                  <th scope="col">CATEGORY</th>
+                  <th scope="col">JOINING DATE</th>
+                  <th scope="col">LEAVING DATE</th>
                   <th scope="col">MOBILE</th>
-                  <th scope="col">ID NO.</th>
+                  <th scope="col">AMOUNT</th>
               </tr>
           </thead>
 
@@ -248,7 +249,7 @@
                       <td>{{ rows.name }}</td>
                       <td>{{ rows.mob_no }}</td>
                       <td>{{ rows.id_no }}</td>
-
+                      <td>{{ rows.id_no }}</td>
                     </tr>
 
             {% endfor %}

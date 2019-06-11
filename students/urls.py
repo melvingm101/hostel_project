@@ -8,7 +8,8 @@ urlpatterns = [
     path('insert', views.insert_excel, name='insert'),
     url('uploadComplete', views.upload_excel, name="uploadComplete"),
     path('', include('django.contrib.auth.urls'), name='front'),
-    path('<int:student_id>/',views.detail,name='detail')
+    path('<int:student_id>/',views.detail,name='detail'),
+    path('guest', views.guest, name='guest')
 ]
 
 

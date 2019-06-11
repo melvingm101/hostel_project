@@ -88,6 +88,9 @@ def front_page(request):
 def login_page(request):
     return render(request, 'login.html')
 
+def guest(request):
+    return render(request, 'guests.html')
+
 @login_required()
 def insert_excel(request):
     print("This is the insert Excel page")
