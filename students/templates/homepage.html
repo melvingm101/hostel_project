@@ -163,7 +163,41 @@
                           </div>
                       </div>
                   </div>
-                  
+                  <div class="row">
+                      <div class="col">
+                        <div class="form-group">
+                            <label>Laundry Charges</label>
+                            <input type="text" class="form-control" id="lChargesInput" placeholder="Eg: 20.0" name="studentName">
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                              <label>Breakage Charges</label>
+                              <input type="text" class="form-control" id="bChargesInput" placeholder="Eg: 50.0" name="studentID">
+                        </div>
+                      </div>
+                    </div>
+
+                  <div class="row">
+                      <div class="col">
+                          <div class="form-group">
+                              <label>Lost Key Charges</label>
+                              <input type="text" class="form-control" id="keyChargesInput" placeholder="Eg: 30.0" name="roomNo">
+                          </div>
+                      </div>
+                      <div class="col">
+                          <div class="form-group">
+                              <label>Guest Charges</label>
+                              <input type="text" class="form-control" id="gChargesInput" placeholder="Eg: 200.0" name="mobileNo">
+                          </div>
+                      </div>
+                      <div class="col">
+                          <div class="form-group">
+                              <label>Other Charges</label>
+                              <input type="text" class="form-control" id="oChargesInput" placeholder="Eg: 10.0" name="blockNo">
+                          </div>
+                      </div>
+                  </div>
                   
                   
 
@@ -201,15 +235,18 @@
 
           <tbody class = "tbodyL">
             {% for rows in res %}
+                <a href="{% url 'detail' rows.id %}">
+                    <tr>
 
-            <tr>
-              <td>{{ rows.id }}</td>
-              <td>{{ rows.room_no }}</td>
-              <td>{{ rows.block }}</td>
-              <td>{{ rows.name }}</td>
-              <td>{{ rows.mob_no }}</td>
-              <td>{{ rows.id_no }}</td>
-            </tr>
+                      <td>
+                          <a href="{% url 'detail' rows.id %}">{{ rows.id }}</a></td>
+                      <td>{{ rows.room_no }}</td>
+                      <td>{{ rows.block }}</td>
+                      <td>{{ rows.name }}</td>
+                      <td>{{ rows.mob_no }}</td>
+                      <td>{{ rows.id_no }}</td>
+
+                    </tr>
 
             {% endfor %}
 

@@ -3,15 +3,15 @@ from django.db import models
 # Create your models here.
 class Other_Charges(models.Model):
     charge_name=models.CharField(max_length=50)
-    charge_value=models.FloatField()
+    charge_value=models.FloatField(default=0)
 
 
 class Charges(models.Model):
-    breakage_charges=models.FloatField()
-    laundry_charges=models.FloatField()
-    lost_key_charges=models.FloatField()
+    breakage_charges=models.FloatField(default=0)
+    laundry_charges=models.FloatField(default=0)
+    lost_key_charges=models.FloatField(default=0)
     other_charges=models.ForeignKey(Other_Charges,on_delete=models.CASCADE)
-    guest_charges=models.FloatField()
+    guest_charges=models.FloatField(default=0)
 
 
 class Student(models.Model):
@@ -21,8 +21,11 @@ class Student(models.Model):
     joining_date=models.DateField()
     leaving_date=models.DateField()
     block=models.CharField(max_length=1)
-    #charges=models.ForeignKey(Charges,on_delete=models.CASCADE)
+    charges=models.ForeignKey(Charges,on_delete=models.CASCADE)
     mob_no=models.CharField(max_length=20)
     email=models.CharField(max_length=100)
     date_added=models.DateTimeField()
+
+    def __str__(self):
+        return self.name
 

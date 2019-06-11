@@ -6,8 +6,10 @@ from django import forms
 from django.shortcuts import render
 from students.forms import LoginForm
 from django.contrib.auth.decorators import login_required
-from students.models import Student
+from students.models import Student, Charges, Other_Charges
 import datetime
+
+
 @login_required()
 def front_page(request):
     normal = []
@@ -67,6 +69,12 @@ def front_page(request):
         for row in stud_rows[1:]:
             args=[cell.value for cell in row]
             student=Student(name=args[0],id_no=args[1],room_no=args[2],joining_date=args[3],leaving_date=args[4],block=args[5],mob_no=args[6],email=args[7],date_added=datetime.datetime.now())
+            charges=Charges(laundry_charges=args[8],lost_key_charges=args[9],breakage_charges=args[10],guest_charges=args[11])
+            other_charges=Other_Charges()
+            other_charges.save()
+            charges.other_charges=other_charges
+            charges.save()
+            student.charges=charges
             student.save()
         # cursor.execute("SELECT * FROM students")
         # res = cursor.fetchall()
@@ -115,6 +123,10 @@ def login(request):
 
 def upload_excel(request):
     print("Boss mode")
+
+def detail(request,student_id):
+    student=Student.objects.get(pk=student_id)
+    return render(request,'display.html',{'student':student})
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
