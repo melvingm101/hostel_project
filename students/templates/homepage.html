@@ -238,11 +238,11 @@
 
           <tbody class = "tbodyL">
             {% for rows in res %}
-                <a href="{% url 'detail' rows.id %}">
+                <a href="{% url 'studentDetail' rows.id %}">
                     <tr>
 
                       <td>
-                          <a href="{% url 'detail' rows.id %}">{{ rows.id }}</a></td>
+                          <a href="{% url 'studentDetail' rows.id %}">{{ rows.id }}</a></td>
                       <td>{{ rows.room_no }}</td>
                       <td>{{ rows.block }}</td>
                       <td>{{ rows.name }}</td>

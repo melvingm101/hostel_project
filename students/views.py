@@ -6,7 +6,7 @@ from django import forms
 from django.shortcuts import render
 from students.forms import LoginForm
 from django.contrib.auth.decorators import login_required
-from students.models import Student, Charges, Other_Charges
+from students.models import Student, Charges, Other_Charges, Guest
 import datetime
 
 
@@ -89,7 +89,19 @@ def login_page(request):
     return render(request, 'login.html')
 
 def guest(request):
-    return render(request, 'guests.html')
+    if request.method == "POST" and request.FILES['excel_file']:
+        excel_files = request.FILES["excel_file"]
+        wb = openpyxl.load_workbook(excel_files)
+        worksheet = wb["Sheet1"]
+        guest_rows = list(worksheet.rows)
+        for row in guest_rows[1:]:
+            args = [cell.value for cell in row]
+            guest = Guest(name=args[0],category=args[1], joining_date=args[2], leaving_date=args[3], room_no=args[4], mob_no=args[5], email=args[6], charges=args[7],date_added=datetime.datetime.now())
+            guest.save()
+
+    res=Guest.objects.all()
+    return render(request, 'guests.html',{'res':res})
+
 
 @login_required()
 def insert_excel(request):
@@ -112,6 +124,11 @@ def insert_excel(request):
         connection.close()
     return render(request, 'insertExcel.html')
 
+
+@login_required()
+def insert_guest(request):
+    return render(request,'insertGuestExcel.html')
+
 def login(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -130,6 +147,10 @@ def upload_excel(request):
 def detail(request,student_id):
     student=Student.objects.get(pk=student_id)
     return render(request,'display.html',{'student':student})
+
+def guest_detail(request,guest_id):
+    guest=Guest.objects.get(pk=guest_id)
+    return render(request,'GuestDetail.html',{'guest':guest})
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
