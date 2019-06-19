@@ -1,12 +1,14 @@
 # Create your views here.
 import openpyxl
+from openpyxl.styles import Border, Alignment, Font
+from copy import copy
 import sqlite3
 
 from django import forms
 from django.shortcuts import render
 from students.forms import LoginForm
 from django.contrib.auth.decorators import login_required
-from students.models import Student, Charges, Other_Charges, Guest
+from students.models import Student, Charges, Other_Charges
 import datetime
 
 
@@ -88,23 +90,23 @@ def front_page(request):
 def login_page(request):
     return render(request, 'login.html')
 
-def guest(request):
-    if request.method == "POST" and request.FILES['excel_file']:
-        excel_files = request.FILES["excel_file"]
-        wb = openpyxl.load_workbook(excel_files)
-        worksheet = wb["Sheet1"]
-        guest_rows = list(worksheet.rows)
-        for row in guest_rows[1:]:
-            args = [cell.value for cell in row]
-            guest = Guest(name=args[0],category=args[1], joining_date=args[2], leaving_date=args[3], room_no=args[4], mob_no=args[5], email=args[6], charges=args[7],date_added=datetime.datetime.now())
-            guest.save()
-
-    res=Guest.objects.all()
-    return render(request, 'guests.html',{'res':res})
+# def guest(request):
+#     if request.method == "POST" and request.FILES['excel_file']:
+#         excel_files = request.FILES["excel_file"]
+#         wb = openpyxl.load_workbook(excel_files)
+#         worksheet = wb["Sheet1"]
+#         guest_rows = list(worksheet.rows)
+#         for row in guest_rows[1:]:
+#             args = [cell.value for cell in row]
+#             guest = Guest(name=args[0],category=args[1], joining_date=args[2], leaving_date=args[3], room_no=args[4], mob_no=args[5], email=args[6], charges=args[7],date_added=datetime.datetime.now())
+#             guest.save()
+#
+#     res=Guest.objects.all()
+#     return render(request, '../guests/templates/guests.html', {'res':res})
 
 
 @login_required()
-def insert_excel(request):
+def insertStudents(request):
     print("This is the insert Excel page")
     connection = sqlite3.connect('students.db')
     cursor = connection.cursor()
@@ -122,12 +124,12 @@ def insert_excel(request):
         #cursor.execute(sql_insert_single)
         connection.commit()
         connection.close()
-    return render(request, 'insertExcel.html')
+    return render(request, 'insertStudentExcel.html')
 
 
-@login_required()
-def insert_guest(request):
-    return render(request,'insertGuestExcel.html')
+# @login_required()
+# def insert_guest(request):
+#     return render(request, '../guests/templates/insertGuestExcel.html')
 
 def login(request):
     if request.method == "POST":
@@ -144,13 +146,56 @@ def login(request):
 def upload_excel(request):
     print("Boss mode")
 
-def detail(request,student_id):
+def studentDetail(request, student_id):
     student=Student.objects.get(pk=student_id)
-    return render(request,'display.html',{'student':student})
+    return render(request, 'studentDetail.html', {'student':student})
 
-def guest_detail(request,guest_id):
-    guest=Guest.objects.get(pk=guest_id)
-    return render(request,'GuestDetail.html',{'guest':guest})
+# def guest_detail(request,guest_id):
+#     guest=Guest.objects.get(pk=guest_id)
+#     return render(request, '../guests/templates/GuestDetail.html', {'guest':guest})
+
+def generateStudentSummary(request):
+    wb=openpyxl.Workbook()
+    ws=wb.active
+    ws['D1']='BITS Pilani, Dubai Campus'
+    ws.merge_cells('D1:F1')
+    heading=ws['D1']
+    heading.alignment=Alignment(horizontal='center', vertical='center')
+    heading.font=Font(bold=True)
+    ws['D3']='Students Report'
+    ws.merge_cells('D3:F3')
+    subheading=ws['D3']
+    subheading=copy(heading)
+
+    ws['A5']='S.No'
+    ws['B5']='Database ID'
+    ws['C5']='Name'
+    ws['D5']='ID Number'
+    ws['E5']='Room Number'
+    ws['F5']='Joining Date'
+    ws['G5']='Leaving Date'
+    ws['H5']='Block'
+    ws['I5']='Mobile Number'
+    ws['J5']='Email'
+    ws['K5']='Total Amount Due'
+
+    row=ws.row_dimensions[5]
+    row.font=Font(bold=True)
+
+    students=list(Student.objects.all())
+    i=1
+    for stud in students:
+        row=[i,stud.id,stud.name,stud.id_no,stud.room_no,stud.joining_date,stud.leaving_date,stud.block,stud.mob_no,stud.email]
+        charges=Charges.objects.get(pk=stud.charges.id)
+        amount=charges.lost_key_charges+charges.breakage_charges+charges.guest_charges+charges.laundry_charges
+        row.append(amount)
+        ws.append(row)
+        i=i+1
+
+    wb.save('testStudentsReport.xlsx')
+
+    return render(request,'homepage.html')
+
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
@@ -161,3 +206,5 @@ class NameForm(forms.Form):
     student = forms.CharField(max_length=100)
     mobile = forms.CharField(max_length=100)
     id = forms.CharField(max_length=100)
+
+

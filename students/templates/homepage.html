@@ -37,10 +37,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="http://172.16.100.8:5000/next">Homepage<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://172.16.100.8:5000/next">Students</a>
+            <a class="nav-link" href="{% url 'studentHome' %}">Students</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="http://172.16.100.8:5000/getPassed">Passed Out</a>
@@ -49,7 +46,7 @@
                 <a class="nav-link" href="#">Items</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="{% url 'guest' %}">Guests</a>
+              <a class="nav-link" href="{% url 'guestHome' %}">Guests</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>
@@ -102,13 +99,13 @@
       <a href="" class="btn btn-primary">
         PassOut Excel
       </a>
-      <a href="{% url 'insert' %}" id="insertExcel" class="btn btn-primary">
+      <a href="{% url 'insertStudents' %}" id="insertExcel" class="btn btn-primary">
         Insert Excel
       </a>
-            </button>
-      <button id="generate"class="btn btn-primary">
+
+       <a href="{% url 'generateStudentSummary' %}" id="generateStudentSummary" class="btn btn-primary">
         Generate Summary
-      </button>
+           </a>
     </div>  
 
     <!-- Modal -->
@@ -123,7 +120,7 @@
           </div>
           <div class="modal-body">
             <!-- FORM HERE -->
-              <form action = "{% url 'insert' %}" method = "POST" enctype="multipart/form-data">
+              <form action = "{% url 'insertStudents' %}" method = "POST" enctype="multipart/form-data">
                   {% csrf_token %}
                   <div class="alert alert-warning alert-dismissible fade show" role="alert">
                       <strong>Warning! </strong>You must fill in all the fields!

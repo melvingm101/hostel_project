@@ -1,0 +1,214 @@
+.js .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+    /* 10px 20px */
+}
+.submit
+{
+padding: 10px 20px 11px !important;
+margin-top: 20px;
+    /* 4px */
+    margin-right: 0.25em;
+font-size: 21px !important;
+background-color: #F36C8C;
+font-weight: bold;
+text-shadow: 1px 1px #F36C8C;
+color: #ffffff;
+border-radius: 100px;
+-moz-border-radius: 100px;
+-webkit-border-radius: 100px;
+border: 1px solid #F36C8C;
+cursor: pointer;
+box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+.no-js .inputfile + label {
+    display: none;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label * {
+    /* pointer-events: none; */
+    /* in case of FastClick lib use */
+}
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    /* 4px */
+    margin-right: 0.25em;
+    /* 4px */
+}
+
+
+/* style 1 */
+
+.inputfile-1 + label {
+    color: #f1e5e6;
+    
+    background-color: #d3394c;
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+    background-color: #722040;
+}
+
+.loader {
+    text-align: center;
+         margin-left: auto;
+    margin-right: auto;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  margin-bottom: 50px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+
+
+.txt {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.type-1 a:hover {
+  padding-left: 48px;
+  padding-right: 28px;
+}
+.type-1 a:hover .round {
+  width: calc(100% - 6px);
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+}
+.type-1 a:hover .round i {
+  left: 12%;
+}
+
+.btn-3 {
+    margin-top: 3em;
+  background-color: #5A5B5E;
+}
+.btn-3 .round {
+  background-color: #737478;
+}
+
+a {
+  text-decoration: none;
+  -moz-border-radius: 30px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  padding: 12px 53px 12px 23px;
+  color: #fff;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  font-weight: bold;
+  position: relative;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  display: inline-block;
+}
+a span {
+  position: relative;
+  z-index: 3;
+}
+a .round {
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  z-index: 2;
+}
+a .round i {
+  position: absolute;
+  top: 50%;
+  margin-top: -6px;
+  left: 50%;
+  margin-left: -4px;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.review{
+ color:  #722040;
+}
+.txt {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.submit1
+{
+padding: 10px 20px 11px !important;
+margin-top: 40px;
+    /* 4px */
+    margin-right: 0.25em;
+font-size: 21px !important;
+background-color: #252525;
+font-weight: bold;
+text-shadow: 1px 1px #F36C8C;
+color: #ffffff;
+border-radius: 100px;
+-moz-border-radius: 100px;
+-webkit-border-radius: 100px;
+border: 1px solid #252525;
+cursor: pointer;
+box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
