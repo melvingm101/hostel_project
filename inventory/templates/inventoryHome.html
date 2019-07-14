@@ -99,11 +99,11 @@
       <a href="" class="btn btn-primary">
         PassOut Excel
       </a>
-      <a href="{% url 'insertStudents' %}" id="insertExcel" class="btn btn-primary">
+      <a href="{% url 'insertInventory' %}" id="insertExcel" class="btn btn-primary">
         Insert Excel
       </a>
 
-       <a href="{% url 'generateStudentSummary' %}" id="generateStudentSummary" class="btn btn-primary">
+       <a href="{% url 'generateInventorySummary' %}" id="generateStudentSummary" class="btn btn-primary">
         Generate Summary
            </a>
     </div>  
@@ -204,7 +204,7 @@
 
 
             <!-- /FORM HERE -->
-{#          </div>#}
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
@@ -218,34 +218,79 @@
       
       
     </div>
-    
+
+
+
+
     <div class="table-responsive-sm mt-3">
+<h1 align="center" margin-top="10">ITEMS</h1>
       <table class="table table-hover table-bordered" id="t01">
           <thead class="thead-default">
               <tr class="bg-dark text-light">
                   <th scope="col">#</th>
-                  <th scope="col">ROOM NO</th> 
-                  <th scope="col">BLOCK</th>
-                  <th scope="col">NAME</th>
-                  <th scope="col">MOBILE</th>
-                  <th scope="col">ID NO.</th>
+                  <th scope="col">ITEM NAME</th>
+                  <th scope="col">STOCK</th>
+                  <th scope="col">IN USE</th>
+                  <th scope="col">AVAILABLE</th>
               </tr>
           </thead>
 
 
           <tbody class = "tbodyL">
-            {% for rows in res %}
-                <a href="{% url 'studentDetail' rows.id %}">
+            {% for item in items %}
+                <a href="{% url 'studentDetail' item.id %}">
                     <tr>
 
                       <td>
-                          <a href="{% url 'studentDetail' rows.id %}">{{ rows.id }}</a></td>
-                      <td>{{ rows.room_no }}</td>
-                      <td>{{ rows.block }}</td>
-                      <td>{{ rows.name }}</td>
-                      <td>{{ rows.mob_no }}</td>
-                      <td>{{ rows.id_no }}</td>
+                          {{ item.id }}</td>
+                      <td>{{ item.name }}</td>
+                      <td>{{ item.stock }}</td>
+                      <td>{{ item.in_use }}</td>
+                      <td>{{ item.available }}</td>
 
+                    </tr>
+                </a>
+            {% endfor %}
+
+          </tbody>
+
+      </table>
+    </div>
+
+
+     <div class="table-responsive-sm mt-3">
+ <h1 align="center">ROOMS INVENTORY</h1>
+      <table class="table table-hover table-bordered" id="t01">
+          <thead class="thead-default">
+              <tr class="bg-dark text-light">
+                  <th scope="col">#</th>
+                  <th scope="col">ROOM NUMBER</th>
+                  <th scope="col">BLOCK</th>
+                  <th scope="col">COTS</th>
+                  <th scope="col">MATTRESSES</th>
+                  <th scope="col">PILLOWS</th>
+                  <th scope="col">LOCKERS</th>
+                  <th scope="col">TABLES</th>
+                  <th scope="col">CHAIRS</th>
+              </tr>
+          </thead>
+
+
+          <tbody class = "tbodyL">
+            {% for room in rooms %}
+                <a href="{% url 'studentDetail' room.id %}">
+                    <tr>
+
+                      <td>
+                          <a href="{% url 'studentDetail' room.id %}">{{ room.id }}</a></td>
+                      <td>{{ room.room_number }}</td>
+                      <td>{{ room.block }}</td>
+                      <td>{{ room.numOfCot }}</td>
+                      <td>{{ room.numOfMattress }}</td>
+                      <td>{{ room.numOfPillow }}</td>
+                        <td>{{ room.numOfLocker }}</td>
+                      <td>{{ room.numOfTable }}</td>
+                      <td>{{ room.numOfChair }}</td>
                     </tr>
                 </a>
             {% endfor %}
@@ -261,7 +306,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
-    <script src="{% static "js/bootstrap.min.js" %}"/>
+    <script src="{% static "js/bootstrap.min.js" %}"
     <script src="{{table}}"></script>
   </body>
 </html>
